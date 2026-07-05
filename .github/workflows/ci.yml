@@ -32,7 +32,7 @@ jobs:
         run: |
           mlflow run MLProject/ \
             --env-manager=local \
-            -P data_path=MLProject/loan_approval_dataset_preprocessing.csv \
+            -P data_path=loan_approval_dataset_preprocessing.csv \
             -P n_estimators=100 \
             -P max_depth=10
         env:
