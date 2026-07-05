@@ -1,0 +1,15 @@
+# File yang tidak perlu di-commit
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv
+venv/
+
+# MLflow artifacts (opsional — terlalu besar untuk GitHub reguler)
+# mlflow.db
+# mlruns/
+
+# OS
+.DS_Store
+Thumbs.db
