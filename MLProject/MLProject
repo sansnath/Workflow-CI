@@ -9,10 +9,4 @@ entry_points:
       max_depth:    {type: int,   default: 10}
       test_size:    {type: float, default: 0.2}
       random_state: {type: int,   default: 42}
-    command: >
-      python modelling.py
-        --data_path    {data_path}
-        --n_estimators {n_estimators}
-        --max_depth    {max_depth}
-        --test_size    {test_size}
-        --random_state {random_state}
+    command: "python modelling.py --data_path {data_path} --n_estimators {n_estimators} --max_depth {max_depth} --test_size {test_size} --random_state {random_state}"
