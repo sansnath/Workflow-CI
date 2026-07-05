@@ -69,17 +69,18 @@ def save_classification_report(y_true, y_pred, save_path="classification_report.
 
 def train(args):
     import os
-    # Gunakan tracking URI dari environment (di-set oleh mlflow run)
-    # Fallback ke SQLite jika tidak ada
-    tracking_uri = os.environ.get("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")
-    mlflow.set_tracking_uri(tracking_uri)
-    mlflow.set_experiment("Loan_Approval_CI")
+
+    active_run_id = os.environ.get("MLFLOW_RUN_ID")
+
+    if not active_run_id:
+        # Standalone mode (bukan via mlflow run) — set URI sendiri
+        mlflow.set_tracking_uri("sqlite:///mlflow.db")
+        mlflow.set_experiment("Loan_Approval_CI")
+    # Jika MLFLOW_RUN_ID ada, mlflow run sudah handle tracking URI & experiment
 
     X_train, X_test, y_train, y_test = load_data(args.data_path, args.test_size, args.random_state)
     print(f"[INFO] Train: {X_train.shape}, Test: {X_test.shape}")
 
-    # Gunakan run yang sudah dibuat oleh mlflow run jika ada
-    active_run_id = os.environ.get("MLFLOW_RUN_ID")
     with mlflow.start_run(run_id=active_run_id, run_name="CI_RandomForest" if not active_run_id else None):
         # Log params
         mlflow.log_param("n_estimators",  args.n_estimators)

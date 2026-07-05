@@ -36,7 +36,7 @@ jobs:
             -P n_estimators=100 \
             -P max_depth=10
         env:
-          MLFLOW_TRACKING_URI: sqlite:///mlflow.db
+          MLFLOW_ALLOW_FILE_STORE: "true"
 
       # ── 5. Upload Artefak ke GitHub ────────────────────────────────────────
       - name: Upload MLflow Artifacts
